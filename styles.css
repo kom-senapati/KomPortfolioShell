@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+    --background-color: #1F2430;
+    --foreground-color: #FFA759;
+    --red-color: #FF3333;
+    --green-color: #BAE67E;
+    --yellow-color: #FFA759;
+    --blue-color: #73D0FF;
+    --purple-color: #D4BFFF;
+    --cyan-color: #95E6CB;
+    --white-color: #CBCCC6;
+    --bright-black-color: #707A8C;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+}
+
+#terminal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#terminal {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    border: 2px solid var(--foreground-color);
+    width: 90%;
+    max-width: 90%;
+    height: 80%;
+    overflow-y: auto;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: var(--background-color);
+    background: var(--bright-black-color);
+}
+
+::selection {
+    color: var(--background-color);
+    background: var(--bright-black-color);
+}
+
+#terminal-output {
+    padding: 10px;
+    white-space: pre-line;
+}
+
+.link {
+    color: var(--blue-color);
+    text-decoration: none;
+}
+
+.link:hover {
+    color: var(--cyan-color)
+}
+
+.name {
+    color: var(--purple-color);
+}
+
+.available-command {
+    color: var(--green-color);
+}
+
+.unavailable-command {
+    color: var(--red-color);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.available-command,
+.name,
+.command-description {
+    padding: 10px 20px;
+}
+
+.available-command {
+    text-align: left;
+}
+
+.command-description {
+    text-align: left;
+}
+
+#input-line {
+    padding: 10px;
+}
+
+#command-line {
+    font-size: 18px;
+}
+
+
+#input-line input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--foreground-color);
+    font-family: monospace;
+    caret-color: var(--foreground-color);
+}
+
+#prompt {
+    color: var(--red-color);
+}
