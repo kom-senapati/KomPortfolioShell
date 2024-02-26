@@ -35,7 +35,7 @@ commandLine.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
         const command = commandLine.value;
-        const output = processCommand(command);
+        const output = processCommand(command.toLowerCase().trim());
         if (output) {
             displayCommand(command);
             displayOutput(output);
