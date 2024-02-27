@@ -15,6 +15,7 @@ const aboutCommands = {
     whoami: "Who are you? 🧐 Dive into self-discovery! 🌊",
     social: "Connect with me. 🌐 Let's network! 🤝",
     projects: "Check out projects. 💻 Prepare to be amazed! ✨",
+    joke: "Get a programming joke. 😄",
     clear: "Clear terminal. 🧹 Keep it tidy! 😊",
 };
 
@@ -41,7 +42,6 @@ commandLine.addEventListener("keydown", function (event) {
             displayOutput(output);
         }
         commandLine.value = "";
-        scrollToBottom()
     }
 });
 
@@ -58,6 +58,7 @@ function displayOutput(output) {
             outputElement.classList.add('output');
             outputElement.textContent = data;
             terminalOutput.appendChild(outputElement);
+            scrollToBottom();
         }).catch(error => {
             console.error('Error displaying output:', error);
         });
@@ -67,6 +68,7 @@ function displayOutput(output) {
         outputElement.style.textIndent = "2em";
         outputElement.innerHTML = output;
         terminalOutput.appendChild(outputElement);
+        scrollToBottom();
     }
 }
 
@@ -91,6 +93,8 @@ function processCommand(command) {
         return output;
     } else if (command === 'banner') {
         return ``
+    } else if (command === 'joke') {
+        return fetchJoke();
     }
     else if (commands.hasOwnProperty(command)) {
         return commands[command];
@@ -105,4 +109,15 @@ function clearTerminal() {
 
 function scrollToBottom() {
     terminal.scrollTop = terminal.scrollHeight;
+}
+
+async function fetchJoke() {
+    try {
+        const response = await fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single');
+        const data = await response.json();
+        return data.joke;
+    } catch (error) {
+        console.error('Error fetching joke:', error);
+        return 'Failed to fetch joke. 😕';
+    }
 }
