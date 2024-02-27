@@ -59,6 +59,12 @@ body {
     white-space: pre-line;
 }
 
+.output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding-left: 2em;
+}
+
 .link {
     color: var(--blue-color);
     text-decoration: none;
@@ -118,4 +124,5 @@ table {
 
 #prompt {
     color: var(--red-color);
+    padding: 1em;
 }

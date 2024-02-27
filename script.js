@@ -65,7 +65,6 @@ function displayOutput(output) {
     } else {
         const outputElement = document.createElement('p');
         outputElement.classList.add('output');
-        outputElement.style.textIndent = "2em";
         outputElement.innerHTML = output;
         terminalOutput.appendChild(outputElement);
         scrollToBottom();
