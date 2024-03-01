@@ -26,6 +26,9 @@ const socials = {
     twitter: `<a href="https://twitter.com/kom_senapati" target="_blank" class="link">twitter.com/kom_senapati</a>`
 };
 
+const header = "Welcome to Portfolio shell,\nType help to see all the commands";
+
+displayOutput(header);
 commandLine.focus();
 
 terminal.addEventListener("click", function () {
@@ -104,6 +107,7 @@ function processCommand(command) {
 
 function clearTerminal() {
     terminalOutput.innerHTML = "";
+    displayOutput(header)
 }
 
 function scrollToBottom() {

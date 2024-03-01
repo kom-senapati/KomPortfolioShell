@@ -16,7 +16,6 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: monospace;
     background-color: var(--background-color);
     color: var(--foreground-color);
 }
@@ -40,7 +39,8 @@ body {
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-    font-size: 18px;
+    font-size: 1.1rem;
+    padding: 1rem;
 }
 
 ::-moz-selection {
@@ -55,14 +55,13 @@ body {
 }
 
 #terminal-output {
-    padding: 10px;
     white-space: pre-line;
 }
 
 .output {
     white-space: pre-wrap;
     word-wrap: break-word;
-    padding-left: 2em;
+    padding-left: 1rem;
 }
 
 .link {
@@ -104,25 +103,34 @@ table {
     text-align: left;
 }
 
+#command-line {
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1rem;
+}
+
 #input-line {
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 10rem;
 }
 
 #command-line {
-    font-size: 18px;
-}
-
-
-#input-line input {
+    max-width: calc(100% - 80px);
+    flex-grow: 1;
     background-color: transparent;
     border: none;
     outline: none;
     color: var(--foreground-color);
-    font-family: monospace;
     caret-color: var(--foreground-color);
 }
 
 #prompt {
+    white-space: nowrap;
+    font-size: 1.1rem;
     color: var(--red-color);
-    padding: 1em;
+    padding: 1rem;
 }
