@@ -16,6 +16,7 @@ const aboutCommands = {
     social: "Connect with me. 🌐 Let's network! 🤝",
     projects: "Check out projects. 💻 Prepare to be amazed! ✨",
     joke: "Get a programming joke. 😄",
+    theme: "Change terminal theme. 🎨",
     clear: "Clear terminal. 🧹 Keep it tidy! 😊",
 };
 
@@ -27,6 +28,69 @@ const socials = {
 };
 
 const header = "Welcome to Portfolio shell,\nType help to see all the commands";
+
+const themes = {
+    default: {
+        '--background-color': '#1F2430',
+        '--foreground-color': '#FFA759',
+        '--red-color': '#FF3333',
+        '--green-color': '#BAE67E',
+        '--yellow-color': '#FFA759',
+        '--blue-color': '#73D0FF',
+        '--purple-color': '#D4BFFF',
+        '--cyan-color': '#95E6CB',
+        '--white-color': '#CBCCC6',
+        '--bright-black-color': '#707A8C'
+    },
+    dracula: {
+        '--background-color': '#282a36',
+        '--foreground-color': '#f8f8f2',
+        '--red-color': '#ff5555',
+        '--green-color': '#50fa7b',
+        '--yellow-color': '#f1fa8c',
+        '--blue-color': '#6272a4',
+        '--purple-color': '#bd93f9',
+        '--cyan-color': '#8be9fd',
+        '--white-color': '#f8f8f2',
+        '--bright-black-color': '#44475a'
+    },
+    ayu: {
+        '--background-color': '#0f1419',
+        '--foreground-color': '#e6e1cf',
+        '--red-color': '#ff3333',
+        '--green-color': '#b8cc52',
+        '--yellow-color': '#e7c547',
+        '--blue-color': '#6CA0E6',
+        '--purple-color': '#C578DD',
+        '--cyan-color': '#80CBC4',
+        '--white-color': '#C1C2D3',
+        '--bright-black-color': '#7A8298'
+    },
+    light: {
+        '--background-color': '#ffffff',
+        '--foreground-color': '#000000',
+        '--red-color': '#ff0000',
+        '--green-color': '#00ff00',
+        '--yellow-color': '#ffff00',
+        '--blue-color': '#0000ff',
+        '--purple-color': '#ff00ff',
+        '--cyan-color': '#00ffff',
+        '--white-color': '#ffffff',
+        '--bright-black-color': '#808080'
+    },
+    dark: {
+        '--background-color': '#000000',
+        '--foreground-color': '#ffffff',
+        '--red-color': '#ff0000',
+        '--green-color': '#00ff00',
+        '--yellow-color': '#ffff00',
+        '--blue-color': '#0000ff',
+        '--purple-color': '#ff00ff',
+        '--cyan-color': '#00ffff',
+        '--white-color': '#ffffff',
+        '--bright-black-color': '#808080'
+    }
+};
 
 displayOutput(header);
 commandLine.focus();
@@ -97,8 +161,17 @@ function processCommand(command) {
         return ``
     } else if (command === 'joke') {
         return fetchJoke();
-    }
-    else if (commands.hasOwnProperty(command)) {
+    } else if (command.startsWith('theme')) {
+        if (command === 'theme') {
+            let availableThemesMsg = 'Available themes: ';
+            availableThemesMsg += Object.keys(themes).join(', ');
+            availableThemesMsg += '. Type "theme THEME" to change theme to THEME.';
+            return availableThemesMsg;
+        } else {
+            const selectedTheme = command.split(' ')[1];
+            return setTheme(selectedTheme);
+        }
+    } else if (commands.hasOwnProperty(command)) {
         return commands[command];
     } else {
         return `${command}: command not found`;
@@ -122,5 +195,17 @@ async function fetchJoke() {
     } catch (error) {
         console.error('Error fetching joke:', error);
         return 'Failed to fetch joke. 😕';
+    }
+}
+
+function setTheme(theme) {
+    const selectedTheme = themes[theme];
+    if (selectedTheme) {
+        for (const [property, value] of Object.entries(selectedTheme)) {
+            document.documentElement.style.setProperty(property, value);
+        }
+        return `Theme set to ${theme}.`;
+    } else {
+        return `Theme ${theme} not found.`;
     }
 }
