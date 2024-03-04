@@ -92,6 +92,10 @@ const themes = {
     }
 };
 
+window.addEventListener("load", (event) => {
+    setTheme(localStorage.getItem("terminal_theme") ?? "default")
+});
+
 displayOutput(header);
 commandLine.focus();
 
@@ -204,6 +208,8 @@ function setTheme(theme) {
         for (const [property, value] of Object.entries(selectedTheme)) {
             document.documentElement.style.setProperty(property, value);
         }
+        if(theme !== "default") localStorage.setItem("terminal_theme", theme)
+        else localStorage.removeItem("terminal_theme");
         return `Theme set to ${theme}.`;
     } else {
         return `Theme ${theme} not found.`;
