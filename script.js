@@ -92,6 +92,11 @@ const themes = {
     }
 };
 
+window.addEventListener("load", (event) => {
+    setTheme(localStorage.getItem("terminal_theme"))
+});
+
+
 displayOutput(header);
 commandLine.focus();
 
