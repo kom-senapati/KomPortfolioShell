@@ -96,7 +96,6 @@ window.addEventListener("load", (event) => {
     setTheme(localStorage.getItem("terminal_theme") ?? "default")
 });
 
-
 displayOutput(header);
 commandLine.focus();
 
