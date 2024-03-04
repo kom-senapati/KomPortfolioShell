@@ -93,7 +93,7 @@ const themes = {
 };
 
 window.addEventListener("load", (event) => {
-    setTheme(localStorage.getItem("terminal_theme"))
+    setTheme(localStorage.getItem("terminal_theme") ?? "default")
 });
 
 
