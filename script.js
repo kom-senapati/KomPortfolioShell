@@ -208,7 +208,7 @@ function setTheme(theme) {
         for (const [property, value] of Object.entries(selectedTheme)) {
             document.documentElement.style.setProperty(property, value);
         }
-        localStorage.setItem("terminal_theme", theme);
+        if(theme !== "default") localStorage.setItem("terminal_theme", theme);
         return `Theme set to ${theme}.`;
     } else {
         return `Theme ${theme} not found.`;
