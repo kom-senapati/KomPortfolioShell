@@ -144,8 +144,8 @@ function displayOutput(output) {
 
 
 function processCommand(command) {
-    if (command == "") return "<br />;
-    if (command === 'clear') {
+    if (command == "") return "<hr />
+    else if (command === 'clear') {
         clearTerminal();
         return null;
     } else if (command === 'help') {
