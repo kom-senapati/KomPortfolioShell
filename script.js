@@ -144,7 +144,8 @@ function displayOutput(output) {
 
 
 function processCommand(command) {
-    if (command === 'clear') {
+    if (command == "") return "<hr hidden />"
+    else if(command === 'clear') {
         clearTerminal();
         return null;
     } else if (command === 'help') {
