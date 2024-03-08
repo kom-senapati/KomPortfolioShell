@@ -3,7 +3,9 @@ const commandLine = document.getElementById("command-line");
 const terminal = document.getElementById("terminal");
 
 const commands = {
-    whois: "I am a CS engineering student studying in Outr BBSR. 🎓 I'm also a python enthusiast 🐍 and a tech explorer 🕵️‍♂️💻",
+    whois: `    Name: K Om Senapati
+    Education: Bachelor of Technology in CSE @ OUTR, BBSR
+    Interests: Python 🐍, SQL 📊, Backend Engineering 💻, Data Science 📈`,
     whoami: "You are a visitor to our terminal. We will soon find out who you are. 🕵️‍♂️ But for now, enjoy the mystery! 🕵️‍♀️",
     projects: "Project Gallery will be made soon! 🚧 Meanwhile, why not imagine amazing projects? 🌟",
     contact: "Contact me at komnoob123@gmail.com 📧 Just don't spam me with cat pictures! 🐱",
@@ -145,7 +147,7 @@ function displayOutput(output) {
 
 function processCommand(command) {
     if (command == "") return "<hr hidden />"
-    else if(command === 'clear') {
+    else if (command === 'clear') {
         clearTerminal();
         return null;
     } else if (command === 'help') {
@@ -209,7 +211,7 @@ function setTheme(theme) {
         for (const [property, value] of Object.entries(selectedTheme)) {
             document.documentElement.style.setProperty(property, value);
         }
-        if(theme !== "default") localStorage.setItem("terminal_theme", theme)
+        if (theme !== "default") localStorage.setItem("terminal_theme", theme)
         else localStorage.removeItem("terminal_theme");
         return `Theme set to ${theme}.`;
     } else {
