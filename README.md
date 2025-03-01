@@ -1,28 +1,101 @@
-# KomPortfolioShell
+# TermFolio
 
-KomPortfolioShell is a simple terminal-like portfolio page, designed to showcase my projects and offer interactive commands for visitors to explore.
+TermFolio is an interactive terminal-style portfolio template that simulates a command-line interface in the browser. It's designed to showcase your projects, skills, and information in a unique and engaging way.
+
+![TermFolio Screenshot](terminal.png)
 
 ## Features
 
-- **Terminal Interface:** Provides a command-line interface for interaction.
-- **Stylish Design:** Stylishly designed using CSS, with vibrant colors and a clean layout, enhancing the overall user experience.
-- **Social Links:** Integrated social links to GitHub, LinkedIn, and Twitter, allowing visitors to connect with you easily.
-- **Contact Information:** Includes contact information.
+- **Interactive Terminal Interface:** Provides a realistic command-line experience for visitors
+- **Customizable Commands:** Easily configure both general and special commands
+- **External Configuration:** All special commands, social links, and descriptions can be edited via a JSON file
+- **Command History:** Navigate through previously entered commands using arrow keys
+- **Themes:** Multiple built-in color themes with the ability to switch between them
+- **Responsive Design:** Works well on both desktop and mobile devices
+- **Social Links Integration:** Easily connect your GitHub, LinkedIn, Twitter, and other social profiles
 
-## About
+## Command Types
 
-KomPortfolioShell is created and maintained by Kom Senapati, a computer science engineering student passionate about technology and exploring new ideas. This project serves as both a showcase of technical skills and a creative endeavor in web development.
+TermFolio supports two types of commands:
 
-## Usage
+### General Commands
 
-Visitors can interact with the terminal by typing commands such as `whois`, `projects`, `contact`, `help`, `social`, and more. Each command provides relevant information or actions, allowing visitors to learn more about you and your projects.
+Built-in system commands that provide standard terminal functionality:
+
+- `help` - Display all available commands
+- `clear` - Clear the terminal screen
+- `echo [text]` - Display the provided text
+- `date` - Show current date and time
+- `ls` - List files in the directory
+- `pwd` - Print working directory
+- `cat [filename]` - Display file contents
+- `man [command]` - Show manual for a command
+- `uname` - Print system information
+- `history` - Show command history
+- `banner` - Display the welcome banner
+
+### Special Commands
+
+Customizable commands that showcase your personal information, projects, and skills:
+
+- `whois` - Display information about you
+- `whoami` - Information for the visitor
+- `projects` - Showcase your projects
+- `contact` - Display contact information
+- `social` - Show social media links
+- `joke` - Display a random programming joke
+- `theme [name]` - Change the terminal theme
+
+## Customization
+
+TermFolio is designed to be easily customizable without editing the core code:
+
+### commands.json
+
+All special commands, social links, title, and description are configured in the `commands.json` file:
+
+```json
+{
+  "title": "TermFolio | Interactive Terminal Portfolio",
+  "description": "Welcome message and instructions",
+  "specialCommands": {
+    "commandName": {
+      "output": "Command output text or HTML",
+      "description": "Command description for help menu"
+    },
+    "functionCommand": {
+      "output": "functionName",
+      "description": "Description for function-based command",
+      "isFunction": true
+    }
+  },
+  "socials": {
+    "github": "<a href=\"https://github.com/yourusername\">github.com/yourusername</a>",
+    "linkedin": "<a href=\"https://linkedin.com/in/yourusername\">linkedin.com/in/yourusername</a>"
+  }
+}
+```
+
+### Adding New Commands
+
+To add a new special command, simply add it to the `specialCommands` object in `commands.json`.
+
+For function-based commands that require JavaScript execution, set `isFunction` to `true` and implement the function in the `script.js` file.
+
+## Setup and Deployment
+
+1. Clone this repository
+2. Edit the `commands.json` file with your information
+3. Customize the appearance by modifying `styles.css` if desired
+4. Deploy to any static web hosting service (GitHub Pages, Netlify, Vercel, etc.)
 
 ## Technologies Used
 
 - HTML
 - CSS
-- JavaScript
+- JavaScript (Vanilla, no frameworks)
 
-## Feedback
+## Contributing
 
-Your feedback is highly appreciated! If you have any suggestions, questions, or issues, feel free to reach out via email at komnoob123@gmail.com.
+Contributions are welcome! Feel free to submit issues or pull requests for bug fixes, features, or improvements.
+
