@@ -2,35 +2,176 @@ const terminalOutput = document.getElementById("terminal-output");
 const commandLine = document.getElementById("command-line");
 const terminal = document.getElementById("terminal");
 
-const commands = {
-  whois: `    Name: K Om Senapati
-    Education: Bachelor of Technology in CSE @ OUTR, BBSR
-    Interests: Python 🐍, SQL 📊, Backend Engineering 💻, Data Science 📈`,
-  whoami:
-    "You are a visitor to our terminal. We will soon find out who you are. 🕵️‍♂️ But for now, enjoy the mystery! 🕵️‍♀️",
-  projects: `Here's the project gallery: <a href="https://project-gallery-eight.vercel.app/" class="link" target="_blank">Project Gallery</a> 🌟`,
-  contact:
-    "Contact me at komnoob123@gmail.com 📧 Just don't spam me with cat pictures! 🐱",
+// Configuration variables
+let specialCommands = {};
+let aboutCommands = {};
+let socials = {};
+let header = "Welcome to Portfolio shell,\nType help to see all the commands";
+let title = "Kom | PorfolioShell";
+
+// General commands implementation
+const generalCommands = {
+  clear: {
+    execute: () => {
+      clearTerminal();
+      return null;
+    },
+    description: "Clear terminal. 🧹 Keep it tidy! 😊"
+  },
+  echo: {
+    execute: (args) => {
+      return args.join(" ");
+    },
+    description: "Echo back your text. 🔊 Like shouting in a canyon! 🏔️"
+  },
+  date: {
+    execute: () => {
+      return new Date().toString();
+    },
+    description: "Display current date and time. ⏰ Time flies! ⏱️"
+  },
+  ls: {
+    execute: () => {
+      return "commands.json\nindex.html\nREADME.md\nscript.js\nstyles.css\nterminal.png";
+    },
+    description: "List files in the directory. 📁 What's in here? 🔍"
+  },
+  pwd: {
+    execute: () => {
+      return "/home/visitor/kom";
+    },
+    description: "Print working directory. 📍 Where am I? 🗺️"
+  },
+  cat: {
+    execute: (args) => {
+      if (args.length === 0) {
+        return "Usage: cat [filename]";
+      }
+      
+      const filename = args[0];
+      const files = {
+        "readme.md": "# KomPortfolioShell\n\nA terminal-like portfolio page for Kom Senapati.",
+        "commands.json": "This file contains all the special commands for this terminal."
+      };
+      
+      if (files[filename.toLowerCase()]) {
+        return files[filename.toLowerCase()];
+      } else {
+        return `cat: ${filename}: No such file or directory`;
+      }
+    },
+    description: "Display file contents. 📄 What's inside? 👀"
+  },
+  man: {
+    execute: (args) => {
+      if (args.length === 0) {
+        return "What manual page do you want? Try 'man [command]'";
+      }
+      
+      const command = args[0];
+      
+      if (generalCommands[command]) {
+        return `NAME\n    ${command} - ${generalCommands[command].description}\n\nDESCRIPTION\n    ${getManualDescription(command)}`;
+      } else if (specialCommands[command]) {
+        return `NAME\n    ${command} - ${specialCommands[command].description}\n\nDESCRIPTION\n    A special command that provides information about Kom's portfolio.`;
+      } else {
+        return `No manual entry for ${command}`;
+      }
+    },
+    description: "Display manual for a command. 📚 Need help? 🆘"
+  },
+  uname: {
+    execute: () => {
+      return "KomShell";
+    },
+    description: "Print system information. 💻 What am I running on? 🖥️"
+  },
+  history: {
+    execute: () => {
+      return "Not implemented";
+    },
+    description: "Show command history. 📜 What did I type before? 🔍"
+  },
+  help: {
+    execute: () => {
+      let output = "<table>";
+      // Add general commands
+      for (let cmd in generalCommands) {
+        output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
+      }
+      // Add special commands
+      for (let cmd in specialCommands) {
+        output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${specialCommands[cmd].description}</td></tr>`;
+      }
+      output += "</table>";
+      return output;
+    },
+    description: "You know what this does. 🙄 Want some hints? 😏"
+  },
+  banner: {
+    execute: () => {
+      return header;
+    },
+    description: "Display the welcome banner. 👋 Hello again! 🎉"
+  }
 };
 
-const aboutCommands = {
-  help: "You know what this does. 🙄 Want some hints? 😏",
-  whois: "Who is kom? 🤔 The brains behind this terminal! 💡",
-  whoami: "Who are you? 🧐 Dive into self-discovery! 🌊",
-  social: "Connect with me. 🌐 Let's network! 🤝",
-  projects: "Check out projects. 💻 Prepare to be amazed! ✨",
-  joke: "Get a programming joke. 😄",
-  theme: "Change terminal theme. 🎨",
-  clear: "Clear terminal. 🧹 Keep it tidy! 😊",
-};
+// Helper function for man command
+function getManualDescription(command) {
+  const manuals = {
+    clear: "Clear the terminal screen.",
+    echo: "Display a line of text. Usage: echo [text]",
+    date: "Display the current date and time.",
+    ls: "List directory contents.",
+    pwd: "Print the name of the current working directory.",
+    cat: "Concatenate and display file contents. Usage: cat [filename]",
+    man: "Display manual page for a command. Usage: man [command]",
+    uname: "Print system information.",
+    history: "Display the command history list.",
+    help: "Display help information about available commands.",
+    banner: "Display the welcome banner."
+  };
+  
+  return manuals[command] || "No detailed description available.";
+}
 
-const socials = {
-  github: `<a href="https://github.com/kom-senapati" target="_blank" class="link">github.com/kom-senapati</a>`,
-  linkedin: `<a href="https://www.linkedin.com/in/kom-senapati/" target="_blank" class="link">linkedin.com/in/kom-senapati</a>`,
-  twitter: `<a href="https://twitter.com/kom_senapati" target="_blank" class="link">twitter.com/kom_senapati</a>`,
-};
-
-const header = "Welcome to Portfolio shell,\nType help to see all the commands";
+// Load special commands from JSON file
+fetch('commands.json')
+  .then(response => response.json())
+  .then(data => {
+    // Set title if provided
+    if (data.title) {
+      title = data.title;
+      document.title = title;
+    }
+    
+    // Set description/header if provided
+    if (data.description) {
+      header = data.description;
+    }
+    
+    // Set special commands
+    if (data.specialCommands) {
+      specialCommands = data.specialCommands;
+      
+      // Add special commands to aboutCommands for help display
+      for (let cmd in specialCommands) {
+        aboutCommands[cmd] = specialCommands[cmd].description;
+      }
+    }
+    
+    // Set socials if provided
+    if (data.socials) {
+      socials = data.socials;
+    }
+    
+    // Display header after loading
+    displayOutput(header);
+  })
+  .catch(error => {
+    console.error('Error loading commands.json:', error);
+    displayOutput(header);
+  });
 
 const themes = {
   default: {
@@ -99,7 +240,7 @@ window.addEventListener("load", (event) => {
   setTheme(localStorage.getItem("terminal_theme") ?? "default");
 });
 
-displayOutput(header);
+// Header is now displayed after loading commands.json
 commandLine.focus();
 
 terminal.addEventListener("click", function () {
@@ -147,42 +288,54 @@ function displayOutput(output) {
   }
 }
 
-function processCommand(command) {
-  if (command == "") return "<hr hidden />";
-  else if (command === "clear") {
-    clearTerminal();
-    return null;
-  } else if (command === "help") {
-    let output = "<table>";
-    for (let cmd in aboutCommands) {
-      output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${aboutCommands[cmd]}</td></tr>`;
+function processCommand(commandInput) {
+  if (commandInput === "") return "<hr hidden />";
+  
+  // Parse command and arguments
+  const parts = commandInput.split(" ");
+  const command = parts[0];
+  const args = parts.slice(1);
+  
+  // Check if it's a general command
+  if (generalCommands.hasOwnProperty(command)) {
+    return generalCommands[command].execute(args);
+  } 
+  // Check if it's a special command
+  else if (specialCommands.hasOwnProperty(command)) {
+    const specialCmd = specialCommands[command];
+    
+    // Handle function-based special commands
+    if (specialCmd.isFunction) {
+      switch (specialCmd.output) {
+        case "social":
+          let output = "<table>";
+          for (let social in socials) {
+            output += `<tr><td class="name">${social}</td><td class="link">${socials[social]}</td></tr>`;
+          }
+          output += "</table>";
+          return output;
+        case "joke":
+          return fetchJoke();
+        case "theme":
+          if (args.length === 0) {
+            let availableThemesMsg = "Available themes: ";
+            availableThemesMsg += Object.keys(themes).join(", ");
+            availableThemesMsg += '. Type "theme THEME" to change theme to THEME.';
+            return availableThemesMsg;
+          } else {
+            return setTheme(args[0]);
+          }
+        default:
+          return `Error: Function ${specialCmd.output} not implemented`;
+      }
+    } 
+    // Return static output for non-function special commands
+    else {
+      return specialCmd.output;
     }
-    output += "</table>";
-    return output;
-  } else if (command === "social") {
-    let output = "<table>";
-    for (let social in socials) {
-      output += `<tr><td class="name">${social}</td><td class="link">${socials[social]}</td></tr>`;
-    }
-    output += "</table>";
-    return output;
-  } else if (command === "banner") {
-    return ``;
-  } else if (command === "joke") {
-    return fetchJoke();
-  } else if (command.startsWith("theme")) {
-    if (command === "theme") {
-      let availableThemesMsg = "Available themes: ";
-      availableThemesMsg += Object.keys(themes).join(", ");
-      availableThemesMsg += '. Type "theme THEME" to change theme to THEME.';
-      return availableThemesMsg;
-    } else {
-      const selectedTheme = command.split(" ")[1];
-      return setTheme(selectedTheme);
-    }
-  } else if (commands.hasOwnProperty(command)) {
-    return commands[command];
-  } else {
+  } 
+  // Handle unknown commands
+  else {
     return `${command}: command not found`;
   }
 }
