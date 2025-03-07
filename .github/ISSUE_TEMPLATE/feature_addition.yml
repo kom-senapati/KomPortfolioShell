@@ -1,0 +1,38 @@
+name: Feature Addition Request 🚀
+description: Requesting the addition of a new feature to contribute to this repository.
+title: "[Feature Addition Request]: "
+body:
+  - type: checkboxes
+    id: guidelines
+    attributes:
+      label: Guidelines
+      options:
+        - label: "I have read the guidelines"
+          required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: Please provide a brief explanation of the feature you want to add.
+      placeholder: Describe the new feature you wish to contribute.
+    validations:
+      required: true
+
+  - type: textarea
+    id: full-name
+    attributes:
+      label: Full Name
+      description: Please enter your full name.
+      placeholder: Enter your full name here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: participant-role
+    attributes:
+      label: Participant Role
+      description: Please mention your role in the Open Source Program (e.g., GSOC, GSSOC, SSOC, JWOC).
+      placeholder: Enter your participant role here.
+    validations:
+      required: true
