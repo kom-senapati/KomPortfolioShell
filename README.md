@@ -108,9 +108,7 @@ To update your portfolio details, edit the `src/config/user.json` file. Modify t
     }
   ]
 }
-
-Simply update the values in user.json, and your portfolio will reflect the changes automatically.
-
+```
 
 ### Adding New Commands:
 
