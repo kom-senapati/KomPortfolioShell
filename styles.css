@@ -91,7 +91,8 @@ table {
 
 .available-command,
 .name,
-.command-description {
+.command-description,
+.description {
     padding: 10px 20px;
 }
 
