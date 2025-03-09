@@ -8,6 +8,7 @@ let aboutCommands = {};
 let socials = {};
 let header = "Welcome to Portfolio shell,\nType help to see all the commands";
 let title = "Kom | PorfolioShell";
+let userData = {}
 
 // General commands implementation
 const generalCommands = {
@@ -113,6 +114,44 @@ const generalCommands = {
       return header;
     },
     description: "Display the welcome banner. 👋 Hello again! 🎉"
+  },
+  whois : {
+    execute: () => {
+      if (!isUserDataAvailable()) {
+        return "🚨 ALERT! 🚨\nIt seems like I have amnesia... My user data has mysteriously vanished into the void! 🌌👀\nTry reloading or summoning the data wizard. 🧙‍♂️✨";
+      }
+      return `    Name: ${userData.name}\n    Email: ${userData.email}\n    Bio: ${userData.bio}`;
+    },
+    description: "Display user information. 🙋 Who am I? 🤔"
+  },
+  social : {
+    execute: () => {
+      if (!isUserDataAvailable("socials")) {
+        return "😱 OH NO! \nIt looks like my social links got lost in the multiverse! 🌀🔮\nMaybe they're chilling in another dimension. 🚀";
+      }
+      let output = "<table>";
+      let socials = userData.socials;
+      for (let social in socials) {
+        output += `<tr><td class="name">${social}</td><td class="link">${socials[social]}</td></tr>`;
+      }  
+      output += "</table>";
+      return output;
+    },
+    "description": "Connect with me. 🌐 Let's network! 🤝",
+  },
+  projects : {
+    execute: () => {
+       if (!isUserDataAvailable("projects")) {
+        return "🛠️ Under Construction! 🏗️\nOops! It seems my projects took a coffee break ☕ and never came back! 🚶💨\nMaybe they're off building the next big thing. Try again later!";
+      }
+      let output = "Here are some of my projects:\n<table>";
+      userData.projects.forEach(project => {
+        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link">${project.link}</td></tr>`;
+      });
+      output += "</table>";
+      return output;
+    },
+    "description": "Check out projects. 💻 Prepare to be amazed! ✨"
   }
 };
 
@@ -134,6 +173,29 @@ function getManualDescription(command) {
   
   return manuals[command] || "No detailed description available.";
 }
+
+// Load user.json file
+async function loadUserData() {
+  try {
+    const response = await fetch('src/config/user.json');
+    if (!response.ok) {
+      throw new Error('Failed to load user data');
+    }
+    
+    userData = await response.json();
+    console.log("User data loaded successfully.");
+  } catch (error) {
+    console.error("Error loading user data:", error);
+    userData = null;
+  }
+}
+
+loadUserData();
+
+// Check if user data is available
+const isUserDataAvailable = (key) => {
+  return userData && (key ? userData[key] && Object.keys(userData[key]).length > 0 : Object.keys(userData).length > 0);
+};
 
 // Load special commands from JSON file
 fetch('commands.json')
