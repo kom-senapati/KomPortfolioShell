@@ -155,10 +155,21 @@ table {
     background: #419fff;
 }
 
-canvas {
+#terminal {
+    position: relative !important;
+    overflow: hidden;
+}
+  
+#terminal canvas {
     position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* Comment this to hide terminal content when matrix effect is active */
+#terminal-output, #input-line {
+    position: relative;
+    z-index: 2;
 }

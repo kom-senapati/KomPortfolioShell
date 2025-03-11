@@ -393,9 +393,9 @@ function processCommand(commandInput) {
         case "matrix":
           if (!matrixCanvas) {
             createMatrixEffect();
-            return 'Matrix effect activated. Press ESC to exit. 🌐';
+            return 'Matrix effect activated. Click × or press ESC to exit. 🌐';
           }
-          return 'Effect already running! Press ESC to exit';
+          return 'Effect already running! Click × or press ESC to exit';
         default:
           return `Error: Function ${specialCmd.output} not implemented`;
       }
@@ -448,70 +448,100 @@ function setTheme(theme) {
 }
 
 function createMatrixEffect() {
-  // Create canvas
-  matrixCanvas = document.createElement('canvas');
-  const ctx = matrixCanvas.getContext('2d');
-  const container = document.getElementById('terminal-container');
+    // Create canvas
+    matrixCanvas = document.createElement('canvas');
+    const ctx = matrixCanvas.getContext('2d');
+    const container = document.getElementById('terminal');
+    
+    // Create control panel
+    const controls = document.createElement('div');
+    // Style elements
+    matrixCanvas.style.cssText = `
+        position: fixed;
+        pointer-events: none;
+        z-index: 1;
+        border-radius: 10px;
+        border: 2px solid var(--foreground-color);
+    `;
+
+    controls.style.cssText = `
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        display: flex;
+        gap: 8px;
+    `;
+    controls.innerHTML = `
+      <span style="color: var(--green-color); cursor: default; user-select: none;">MATRIX</span>
+      <span style="color: var(--red-color); cursor: pointer; padding: 0 5px; user-select: none;" 
+            id="matrix-close">×</span>
+    `;
   
-  // Set canvas size
-  function resizeCanvas() {
-    matrixCanvas.width = container.clientWidth;
-    matrixCanvas.height = container.clientHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  // Matrix characters (Japanese Katakana for authenticity)
-  const chars = 'アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロ';
-  const fontSize = 14;
-  const columns = Math.floor(matrixCanvas.width / fontSize);
-  
-  // Initialize columns
-  matrixColumns = Array(columns).fill(0);
-
-  // Rain effect
-  function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-    ctx.fillStyle = '#0F0';
-    ctx.font = `${fontSize}px JetBrains Mono`;
-
-    matrixColumns.forEach((y, i) => {
-      const char = chars[Math.floor(Math.random() * chars.length)];
-      const x = i * fontSize;
-      ctx.fillText(char, x, y);
-      
-      if (y > matrixCanvas.height && Math.random() > 0.975) {
-        matrixColumns[i] = 0;
-      }
-      matrixColumns[i] += fontSize;
-    });
-
-    matrixAnimationFrame = requestAnimationFrame(draw);
-  }
-
-  // Start animation
-  draw();
-
-  // Add to DOM
-  container.appendChild(matrixCanvas);
-  container.style.position = 'relative';
-
-  // Handle escape key
-  function handleKeyPress(e) {
-    if (e.key === 'Escape') {
-      stopMatrixEffect();
+    // Set canvas size
+    let fontSize = 14;
+    let columns;
+    
+    function resizeCanvas() {
+      const rect = container.getBoundingClientRect();
+      matrixCanvas.width = rect.width;
+      matrixCanvas.height = rect.height;
+      columns = Math.floor(matrixCanvas.width / fontSize);
+      matrixColumns = Array(columns).fill(0);
     }
+  
+    // Matrix characters
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+  
+    // Rain effect
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+      
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--green-color');
+      ctx.font = `${fontSize}px JetBrains Mono`;
+  
+      matrixColumns.forEach((y, i) => {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        ctx.fillText(char, x, y);
+        
+        if (y > matrixCanvas.height && Math.random() > 0.975) {
+          matrixColumns[i] = 0;
+        }
+        matrixColumns[i] += fontSize;
+      });
+  
+      matrixAnimationFrame = requestAnimationFrame(draw);
+    }
+  
+    // Event handlers
+    const handleKeyPress = (e) => {
+      if (e.key === 'Escape') stopMatrixEffect();
+    };
+  
+    const stopMatrixEffect = () => {
+      cancelAnimationFrame(matrixAnimationFrame);
+      container.removeChild(controls);
+      container.removeChild(matrixCanvas);
+      window.removeEventListener('resize', resizeCanvas);
+      document.removeEventListener('keydown', handleKeyPress);
+      matrixCanvas = null;
+      displayOutput('Matrix effect deactivated');
+    };
+  
+    // Initial setup
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    document.addEventListener('keydown', handleKeyPress);
+    
+    // Add elements to DOM first
+    container.appendChild(controls);
+    container.appendChild(matrixCanvas);
+    
+    // Then add click listener
+    controls.querySelector('#matrix-close').addEventListener('click', stopMatrixEffect);
+  
+    // Start animation
+    draw();
   }
-  document.addEventListener('keydown', handleKeyPress);
-
-  // Cleanup function
-  function stopMatrixEffect() {
-    cancelAnimationFrame(matrixAnimationFrame);
-    container.removeChild(matrixCanvas);
-    window.removeEventListener('resize', resizeCanvas);
-    document.removeEventListener('keydown', handleKeyPress);
-    matrixCanvas = null;
-    displayOutput('Matrix effect deactivated. Wake up, Visitor... 💊');
-  }
-}
