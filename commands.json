@@ -32,6 +32,11 @@
       "output": "theme",
       "description": "Change terminal theme. 🎨",
       "isFunction": true
+    },
+    "matrix": {
+      "output": "matrix",
+      "description": "Activate matrix effect. 🌌 Follow the white rabbit! 🐇",
+      "isFunction": true
     }
   },
   "socials": {

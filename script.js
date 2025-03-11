@@ -9,6 +9,9 @@ let socials = {};
 let header = "Welcome to Portfolio shell,\nType help to see all the commands";
 let title = "Kom | PorfolioShell";
 let userData = {}
+let matrixCanvas = null;
+let matrixAnimationFrame = null;
+let matrixColumns = [];
 
 // General commands implementation
 const generalCommands = {
@@ -387,6 +390,12 @@ function processCommand(commandInput) {
           } else {
             return setTheme(args[0]);
           }
+        case "matrix":
+          if (!matrixCanvas) {
+            createMatrixEffect();
+            return 'Matrix effect activated. Press ESC to exit. 🌐';
+          }
+          return 'Effect already running! Press ESC to exit';
         default:
           return `Error: Function ${specialCmd.output} not implemented`;
       }
@@ -435,5 +444,74 @@ function setTheme(theme) {
     return `Theme set to ${theme}.`;
   } else {
     return `Theme ${theme} not found.`;
+  }
+}
+
+function createMatrixEffect() {
+  // Create canvas
+  matrixCanvas = document.createElement('canvas');
+  const ctx = matrixCanvas.getContext('2d');
+  const container = document.getElementById('terminal-container');
+  
+  // Set canvas size
+  function resizeCanvas() {
+    matrixCanvas.width = container.clientWidth;
+    matrixCanvas.height = container.clientHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Matrix characters (Japanese Katakana for authenticity)
+  const chars = 'アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロ';
+  const fontSize = 14;
+  const columns = Math.floor(matrixCanvas.width / fontSize);
+  
+  // Initialize columns
+  matrixColumns = Array(columns).fill(0);
+
+  // Rain effect
+  function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    ctx.fillStyle = '#0F0';
+    ctx.font = `${fontSize}px JetBrains Mono`;
+
+    matrixColumns.forEach((y, i) => {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      const x = i * fontSize;
+      ctx.fillText(char, x, y);
+      
+      if (y > matrixCanvas.height && Math.random() > 0.975) {
+        matrixColumns[i] = 0;
+      }
+      matrixColumns[i] += fontSize;
+    });
+
+    matrixAnimationFrame = requestAnimationFrame(draw);
+  }
+
+  // Start animation
+  draw();
+
+  // Add to DOM
+  container.appendChild(matrixCanvas);
+  container.style.position = 'relative';
+
+  // Handle escape key
+  function handleKeyPress(e) {
+    if (e.key === 'Escape') {
+      stopMatrixEffect();
+    }
+  }
+  document.addEventListener('keydown', handleKeyPress);
+
+  // Cleanup function
+  function stopMatrixEffect() {
+    cancelAnimationFrame(matrixAnimationFrame);
+    container.removeChild(matrixCanvas);
+    window.removeEventListener('resize', resizeCanvas);
+    document.removeEventListener('keydown', handleKeyPress);
+    matrixCanvas = null;
+    displayOutput('Matrix effect deactivated. Wake up, Visitor... 💊');
   }
 }

@@ -45,6 +45,7 @@ Customizable commands that showcase your personal information, projects, and ski
 - `social` - Show social media links
 - `joke` - Display a random programming joke
 - `theme [name]` - Change the terminal theme
+- `matrix` - Apply a matrix effect. Press Esc to exit
 
 ## Customization
 
