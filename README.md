@@ -1,135 +1,117 @@
-# TermFolio
+# ⚡ TerminalFolio 
 
-TermFolio is an interactive terminal-style portfolio template that simulates a command-line interface in the browser. It's designed to showcase your projects, skills, and information in a unique and engaging way.
+> **Interactive Terminal Portfolio Template**  
+> Simulates a command-line interface to showcase your projects and skills uniquely.
 
-![TermFolio Screenshot](terminal.png)
 
-## Features
+## ✨ Features  
+✅ **Interactive Terminal Interface** – Realistic command-line experience  
+✅ **Custom Commands** – Easily configurable JSON-based commands  
+✅ **Themes** – Multiple built-in themes with a switch option  
+✅ **Responsive Design** – Works on desktop & mobile  
+✅ **Social Integration** – Connect GitHub, LinkedIn, Twitter  
 
-- **Interactive Terminal Interface:** Provides a realistic command-line experience for visitors
-- **Customizable Commands:** Easily configure both general and special commands
-- **External Configuration:** All special commands, social links, and descriptions can be edited via a JSON file
-- **Command History:** Navigate through previously entered commands using arrow keys
-- **Themes:** Multiple built-in color themes with the ability to switch between them
-- **Responsive Design:** Works well on both desktop and mobile devices
-- **Social Links Integration:** Easily connect your GitHub, LinkedIn, Twitter, and other social profiles
 
-## Command Types
+<details>
+  <summary><h2>💻 Commands</h2></summary>
 
-TermFolio supports two types of commands:
+### 🛠 General Commands
+- `help` – Show available commands  
+- `clear` – Clear the terminal  
+- `echo [text]` – Display text  
+- `ls` – List files  
+- `cat [file]` – Show file contents  
+- `man [command]` – Show manual  
+- `banner` – Display welcome message  
 
-### General Commands
+### 🚀 Special Commands
+- `whois` – About you  
+- `projects` – Show your projects  
+- `contact` – Your contact info  
+- `social` – Social links  
+- `theme [name]` – Change theme  
 
-Built-in system commands that provide standard terminal functionality:
+</details>
 
-- `help` - Display all available commands
-- `clear` - Clear the terminal screen
-- `echo [text]` - Display the provided text
-- `date` - Show current date and time
-- `ls` - List files in the directory
-- `pwd` - Print working directory
-- `cat [filename]` - Display file contents
-- `man [command]` - Show manual for a command
-- `uname` - Print system information
-- `history` - Show command history
-- `banner` - Display the welcome banner
 
-### Special Commands
+## ⚙️ Customization  
 
-Customizable commands that showcase your personal information, projects, and skills:
-
-- `whois` - Display information about you
-- `whoami` - Information for the visitor
-- `projects` - Showcase your projects
-- `contact` - Display contact information
-- `social` - Show social media links
-- `joke` - Display a random programming joke
-- `theme [name]` - Change the terminal theme
-
-## Customization
-
-TermFolio is designed to be easily customizable without editing the core code:
-
-### commands.json
-
-All special commands, social links, title, and description are configured in the `commands.json` file:
+Edit `commands.json` to modify commands, social links, and descriptions.  
 
 ```json
 {
-  "title": "TermFolio | Interactive Terminal Portfolio",
-  "description": "Welcome message and instructions",
+  "title": "TermFolio",
+  "description": "Interactive CLI Portfolio",
   "specialCommands": {
-    "commandName": {
-      "output": "Command output text or HTML",
-      "description": "Command description for help menu"
-    },
-    "functionCommand": {
-      "output": "functionName",
-      "description": "Description for function-based command",
-      "isFunction": true
-    }
+    "whois": { "output": "Your bio here", "description": "About you" },
+    "projects": { "output": "Your projects list", "description": "Show projects" }
   },
   "socials": {
-    "github": "<a href=\"https://github.com/yourusername\">github.com/yourusername</a>",
-    "linkedin": "<a href=\"https://linkedin.com/in/yourusername\">linkedin.com/in/yourusername</a>"
+    "github": "<a href='https://github.com/yourusername'>GitHub</a>",
+    "linkedin": "<a href='https://linkedin.com/in/yourusername'>LinkedIn</a>"
   }
 }
 ```
 
-## Updating Your Portfolio Data
+---
 
-To update your portfolio details, edit the `src/config/user.json` file. Modify the fields as needed:
+## 📂 Setup & Deployment  
 
-- `"name"`: Your full name.
-- `"email"`: Your contact email.
-- `"bio"`: A short description about yourself.
-- `"resume"`: A link to your resume (Google Drive, website, etc.).
-- `"socials"`: Links to your social profiles.
-- `"projects"`: A list of your projects with a name, description, and link.
+1. **Fork the Repository** – Click the **"Fork"** button at the top-right of the repo on GitHub.  
 
-### Example:
+2. **Clone Your Forked Repo:**  
+   ```sh
+   git clone https://github.com/your-username/TermFolio.git
+   ```
+   *(Replace `your-username` with your GitHub username.)*  
 
-```json
-{
-  "name": "Jane Doe",
-  "email": "jane.doe@example.com",
-  "bio": "Full-stack developer interested in cloud and AI.",
-  "resume": "https://example.com/jane-resume.pdf",
-  "socials": {
-    "github": "https://github.com/janedoe",
-    "linkedin": "https://linkedin.com/in/janedoe",
-    "twitter": "https://twitter.com/janedoe"
-  },
-  "projects": [
-    {
-      "name": "Task Manager App",
-      "description": "A web-based task management system using React and Firebase.",
-      "link": "https://github.com/janedoe/task-manager"
-    }
-  ]
-}
-```
+3. **Customize JSON & Styles:**  
+   Modify `commands.json` & `styles.css` as needed.  
 
-### Adding New Commands:
+4. **Deploy:**  
+   Host it on **GitHub Pages**.
 
-To add a new special command, simply add it to the `specialCommands` object in `commands.json`.
 
-For function-based commands that require JavaScript execution, set `isFunction` to `true` and implement the function in the `script.js` file.
+## 🛠 Technologies  
 
-## Setup and Deployment
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=html,css,js" />
+  </a>
+</p>
 
-1. Clone this repository
-2. Edit the `commands.json` file with your information
-3. Customize the appearance by modifying `styles.css` if desired
-4. Deploy to any static web hosting service (GitHub Pages, Netlify, Vercel, etc.)
+---
 
-## Technologies Used
+## 🤝 Contributing  
+🚀 Feel free to create issues or submit pull requests to improve TermFolio!  
 
-- HTML
-- CSS
-- JavaScript (Vanilla, no frameworks)
+<div>
+   <h2><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4aa/512.webp" width="35" height="35" >Open Source Programs</h2>
+</div>
+<table border="1" cellpadding="10">
+    <tr>
+        <td rowspan="2">
+            <img src="https://s2apertre.resourcio.in/Logo_primary.svg" alt="Apertre Logo" width="400" height="85">
+        </td>
+        <td>
+            <strong>Apertre 2.0</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            This project is part of Apertre 2.0. We welcome contributions from the community.
+        </td>
+    </tr>
+</table>
 
-## Contributing
 
-Contributions are welcome! Feel free to submit issues or pull requests for bug fixes, features, or improvements.
+<div align="center">
+  <h1>Tip from us 😇</h1>
+  <p>It always takes time to understand and learn. So, don't worry at all. We know <b>you have got this</b>! 💪</p>
+</div>
 
+<div>
+  <h2><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2764_fe0f/512.webp" width="35" height="35"> Show Your Support</h2>
+</div>
+
+If you find this project interesting and inspiring, please consider showing your support by starring it on GitHub! Your star goes a long way in helping us to reach more developers and encourages to keep enhancing the project.
