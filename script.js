@@ -302,7 +302,7 @@ const themes = {
   powershell: {
     "--background-color": "#012456",
     "--foreground-color": "#ffffff",
-    "--red-color": "#FF3E3E",
+    "--red-color": "#0ACF83", // Changed from red to green
     "--green-color": "#0ACF83",
     "--yellow-color": "#F9D448",
     "--blue-color": "#1F9CF0",
@@ -310,6 +310,7 @@ const themes = {
     "--cyan-color": "#00D4FF",
     "--white-color": "#FFFFFF",
     "--bright-black-color": "#5C5C5C",
+    "--font-family": "Consolas, monospace" // Added font family
   }
 };
 
@@ -511,7 +512,7 @@ function createMatrixEffect() {
       ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
       
       ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--green-color');
-      ctx.font = `${fontSize}px JetBrains Mono`;
+      ctx.font = `${fontSize}px ${getComputedStyle(document.documentElement).getPropertyValue('--font-family') || 'JetBrains Mono'}`;
   
       matrixColumns.forEach((y, i) => {
         const char = chars[Math.floor(Math.random() * chars.length)];
