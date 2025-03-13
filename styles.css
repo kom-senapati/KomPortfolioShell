@@ -34,13 +34,15 @@ body {
     width: 90%;
     max-width: 90%;
     height: 80%;
-    overflow-y: auto;
+    overflow-y: auto; /* This enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
     font-size: 1.1rem;
     padding: 1rem;
+    position: relative !important;
 }
 
 ::-moz-selection {
@@ -155,17 +157,10 @@ table {
     background: #419fff;
 }
 
+/* Remove or modify this conflicting rule at the bottom of the file */
 #terminal {
     position: relative !important;
-    overflow: hidden;
-}
-  
-#terminal canvas {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+    /* Remove this line: overflow: hidden; */
 }
 
 /* Comment this to hide terminal content when matrix effect is active */
