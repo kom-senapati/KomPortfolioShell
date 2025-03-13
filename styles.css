@@ -35,7 +35,7 @@ body {
     max-width: 90%;
     height: 80%;
     overflow-y: auto;
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-family), monospace;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -62,6 +62,7 @@ body {
     white-space: pre-wrap;
     word-wrap: break-word;
     padding-left: 1rem;
+    font-family: var(--font-family), monospace;
 }
 
 .link {
@@ -105,7 +106,7 @@ table {
 }
 
 #command-line {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-family), monospace;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
