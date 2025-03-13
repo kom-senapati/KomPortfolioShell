@@ -299,6 +299,18 @@ const themes = {
     "--white-color": "#ffffff",
     "--bright-black-color": "#808080",
   },
+  powershell: {
+    "--background-color": "#012456",
+    "--foreground-color": "#ffffff",
+    "--red-color": "#FF3E3E",
+    "--green-color": "#0ACF83",
+    "--yellow-color": "#F9D448",
+    "--blue-color": "#1F9CF0",
+    "--purple-color": "#B381F5",
+    "--cyan-color": "#00D4FF",
+    "--white-color": "#FFFFFF",
+    "--bright-black-color": "#5C5C5C",
+  }
 };
 
 window.addEventListener("load", (event) => {
