@@ -36,6 +36,23 @@
 
 ## ⚙️ Customization  
 
+Customizable commands that showcase your personal information, projects, and skills:
+
+- `whois` - Display information about you
+- `whoami` - Information for the visitor
+- `projects` - Showcase your projects
+- `contact` - Display contact information
+- `social` - Show social media links
+- `joke` - Display a random programming joke
+- `theme [name]` - Change the terminal theme
+- `matrix` - Apply a matrix effect. Press Esc to exit
+
+## Customization
+
+TermFolio is designed to be easily customizable without editing the core code:
+
+### commands.json
+
 Edit `commands.json` to modify commands, social links, and descriptions.  
 
 ```json

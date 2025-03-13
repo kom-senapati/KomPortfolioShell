@@ -154,3 +154,22 @@ table {
 ::-webkit-scrollbar-thumb:hover {
     background: #419fff;
 }
+
+#terminal {
+    position: relative !important;
+    overflow: hidden;
+}
+  
+#terminal canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* Comment this to hide terminal content when matrix effect is active */
+#terminal-output, #input-line {
+    position: relative;
+    z-index: 2;
+}
