@@ -250,6 +250,7 @@ const themes = {
     "--cyan-color": "#95E6CB",
     "--white-color": "#CBCCC6",
     "--bright-black-color": "#707A8C",
+    "--font-family": "JetBrains Mono, monospace"
   },
   dracula: {
     "--background-color": "#282a36",
@@ -262,6 +263,7 @@ const themes = {
     "--cyan-color": "#8be9fd",
     "--white-color": "#f8f8f2",
     "--bright-black-color": "#44475a",
+    "--font-family": "JetBrains Mono, monospace"
   },
   ayu: {
     "--background-color": "#0f1419",
@@ -274,6 +276,7 @@ const themes = {
     "--cyan-color": "#80CBC4",
     "--white-color": "#C1C2D3",
     "--bright-black-color": "#7A8298",
+    "--font-family": "JetBrains Mono, monospace"
   },
   light: {
     "--background-color": "#ffffff",
@@ -286,6 +289,7 @@ const themes = {
     "--cyan-color": "#00ffff",
     "--white-color": "#ffffff",
     "--bright-black-color": "#808080",
+    "--font-family": "JetBrains Mono, monospace"
   },
   dark: {
     "--background-color": "#000000",
@@ -298,7 +302,21 @@ const themes = {
     "--cyan-color": "#00ffff",
     "--white-color": "#ffffff",
     "--bright-black-color": "#808080",
+    "--font-family": "JetBrains Mono, monospace"
   },
+  powershell: {
+    "--background-color": "#012456",
+    "--foreground-color": "#ffffff",
+    "--red-color": "#0ACF83", // Changed from red to green
+    "--green-color": "#0ACF83",
+    "--yellow-color": "#F9D448",
+    "--blue-color": "#1F9CF0",
+    "--purple-color": "#B381F5",
+    "--cyan-color": "#00D4FF",
+    "--white-color": "#FFFFFF",
+    "--bright-black-color": "#5C5C5C",
+    "--font-family": "Consolas, monospace" // Added font family
+  }
 };
 
 window.addEventListener("load", (event) => {
@@ -499,7 +517,7 @@ function createMatrixEffect() {
       ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
       
       ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--green-color');
-      ctx.font = `${fontSize}px JetBrains Mono`;
+      ctx.font = `${fontSize}px ${getComputedStyle(document.documentElement).getPropertyValue('--font-family')}`;
   
       matrixColumns.forEach((y, i) => {
         const char = chars[Math.floor(Math.random() * chars.length)];
