@@ -12,6 +12,8 @@ let userData = {}
 let matrixCanvas = null;
 let matrixAnimationFrame = null;
 let matrixColumns = [];
+let commandHistory = [];
+let currentHistoryIndex = 0;
 
 // General commands implementation
 const generalCommands = {
@@ -92,7 +94,7 @@ const generalCommands = {
   },
   history: {
     execute: () => {
-      return "Not implemented";
+      return commandHistory.join("\n") || "No commands in history yet";
     },
     description: "Show command history. 📜 What did I type before? 🔍"
   },
@@ -339,7 +341,32 @@ commandLine.addEventListener("keydown", function (event) {
       displayCommand(command);
       displayOutput(output);
     }
+    // Add command to history
+    const trimmedCommand = command.trim();
+    if (trimmedCommand) {
+      commandHistory.push(trimmedCommand);
+      currentHistoryIndex = commandHistory.length;
+    }
     commandLine.value = "";
+  } else if (event.key === "ArrowUp") {
+    event.preventDefault();
+    if (commandHistory.length === 0) return;
+
+    if (currentHistoryIndex > 0) {
+      currentHistoryIndex--;
+      commandLine.value = commandHistory[currentHistoryIndex];
+    }
+  } else if (event.key === "ArrowDown") {
+    event.preventDefault();
+    if (commandHistory.length === 0) return;
+
+    if (currentHistoryIndex < commandHistory.length) {
+      currentHistoryIndex++;
+    }
+
+    commandLine.value = currentHistoryIndex < commandHistory.length 
+      ? commandHistory[currentHistoryIndex] 
+      : '';
   }
 });
 
@@ -562,4 +589,4 @@ function createMatrixEffect() {
   
     // Start animation
     draw();
-  }
+}
