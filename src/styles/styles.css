@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+    --background-color: #1F2430;
+    --foreground-color: #FFA759;
+    --red-color: #FF3333;
+    --green-color: #BAE67E;
+    --yellow-color: #FFA759;
+    --blue-color: #73D0FF;
+    --purple-color: #D4BFFF;
+    --cyan-color: #95E6CB;
+    --white-color: #CBCCC6;
+    --bright-black-color: #707A8C;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+}
+
+#terminal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#terminal {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    border: 2px solid var(--foreground-color);
+    width: 90%;
+    max-width: 90%;
+    height: 80%;
+    overflow-y: auto;
+    font-family: var(--font-family), monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: var(--background-color);
+    background: var(--bright-black-color);
+}
+
+::selection {
+    color: var(--background-color);
+    background: var(--bright-black-color);
+}
+
+#terminal-output {
+    white-space: pre-line;
+}
+
+.output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding-left: 1rem;
+    font-family: var(--font-family), monospace;
+}
+
+.link {
+    color: var(--blue-color);
+    text-decoration: none;
+}
+
+.link:hover {
+    color: var(--cyan-color)
+}
+
+.name {
+    color: var(--purple-color);
+}
+
+.available-command {
+    color: var(--green-color);
+}
+
+.unavailable-command {
+    color: var(--red-color);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.available-command,
+.name,
+.command-description,
+.description {
+    padding: 10px 20px;
+}
+
+.available-command {
+    text-align: left;
+}
+
+.command-description {
+    text-align: left;
+}
+
+#command-line {
+    font-family: var(--font-family), monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1rem;
+}
+
+#input-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 10rem;
+}
+
+#command-line {
+    max-width: calc(100% - 80px);
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--foreground-color);
+    caret-color: var(--foreground-color);
+}
+
+#prompt {
+    white-space: nowrap;
+    font-size: 1.1rem;
+    color: var(--red-color);
+    padding: 1rem;
+}
+
+::-webkit-scrollbar {
+    height: 0px;
+    width: 3.69px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--foreground-color);
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #419fff;
+}
+
+#terminal {
+    position: relative !important;
+    overflow: hidden;
+}
+  
+#terminal canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* Comment this to hide terminal content when matrix effect is active */
+#terminal-output, #input-line {
+    position: relative;
+    z-index: 2;
+}
