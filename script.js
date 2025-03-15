@@ -441,6 +441,8 @@ function processCommand(commandInput) {
             return 'Matrix effect activated. Click × or press ESC to exit. 🌐';
           }
           return 'Effect already running! Click × or press ESC to exit';
+        case "rps":
+          return handleRPS(args);
         default:
           return `Error: Function ${specialCmd.output} not implemented`;
       }
@@ -589,4 +591,38 @@ function createMatrixEffect() {
   
     // Start animation
     draw();
+}
+
+function handleRPS(args) {
+  if (args.length === 0) {
+    return 'Usage: rps [rock|paper|scissors]';
+  }
+
+  const userChoice = args[0].toLowerCase();
+  const validChoices = ['rock', 'paper', 'scissors'];
+  
+  if (!validChoices.includes(userChoice)) {
+    return `Invalid choice: ${userChoice}. Please choose rock, paper, or scissors.`;
+  }
+
+  const terminalChoice = validChoices[Math.floor(Math.random() * 3)];
+  const result = determineWinner(userChoice, terminalChoice);
+
+  const emojis = {
+    rock: '🪨',
+    paper: '📄',
+    scissors: '✂️'
+  };
+
+  return `You chose ${emojis[userChoice]} ${userChoice}\nTerminal chose ${emojis[terminalChoice]} ${terminalChoice}\nResult: ${result}`;
+}
+
+function determineWinner(user, terminal) {
+  if (user === terminal) return 'It\'s a tie! 🤝';
+  if ((user === 'rock' && terminal === 'scissors') ||
+      (user === 'paper' && terminal === 'rock') ||
+      (user === 'scissors' && terminal === 'paper')) {
+    return 'You win! 🎉';
+  }
+  return 'Terminal wins! 💻';
 }
