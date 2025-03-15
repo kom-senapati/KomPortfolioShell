@@ -28,6 +28,36 @@
       "description": "Get a programming joke. 😄",
       "isFunction": true
     },
+    "hello": {
+    "output": "Hello! How can I assist you today?",
+    "description": "Greet the user"
+    },
+    "fact": {
+    "output": "fact",
+    "description": "Get a fun fact. 🤯",
+    "isFunction": true
+    },
+    "osinfo": {
+  "output": "osinfo",
+  "description": "Get the OS info of the user",
+  "isFunction": true
+},
+
+    "quote": {
+    "output": "quote",
+    "description": "Get a motivational quote. 📝",
+    "isFunction": true
+    },
+    "advice": {
+   "output": "advice",
+   "description": "Get a random life advice. 🤔",
+   "isFunction": true
+    },
+    "trivia": {
+  "output": "trivia",
+  "description": "Test your knowledge with a trivia fact! 🎓",
+  "isFunction": true
+},
     "theme": {
       "output": "theme",
       "description": "Change terminal theme. 🎨",
