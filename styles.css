@@ -117,18 +117,26 @@ table {
     display: flex;
     flex-direction: row;
     align-items: center;
-    max-width: 10rem;
+    max-width: 100%;
 }
 
 #command-line {
-    max-width: calc(100% - 80px);
+    width: auto;
+    min-width: 5rem;
+    max-width: 100%;
     flex-grow: 1;
     background-color: transparent;
     border: none;
     outline: none;
     color: var(--foreground-color);
     caret-color: var(--foreground-color);
+    font-family: var(--font-family), monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1rem;
 }
+
 
 #prompt {
     white-space: nowrap;
