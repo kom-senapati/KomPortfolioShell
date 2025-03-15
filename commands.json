@@ -37,6 +37,11 @@
       "output": "matrix",
       "description": "Activate matrix effect. 🌌 Follow the white rabbit! 🐇",
       "isFunction": true
+    },
+    "rps": {
+      "output": "rps",
+      "description": "Play Rock-Paper-Scissors against the terminal. 🪨📄✂️",
+      "isFunction": true
     }
   },
   "socials": {
